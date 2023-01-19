@@ -1,0 +1,28 @@
+<h1 id="tableLabel">ping</h1>
+
+<!-- p *ngIf="!pingEvents?.length"><em>Loading...</em></p -->
+<div>
+  <input [ngModel]="hostname" (ngModelChange)="hostname = $event">
+  <button type="button" (click)="onClickPingButton()">{{ pingButtonText }}</button>
+</div>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="pingEvents.length">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Status</th>
+      <th>Roundtrip Time</th>
+      <th>Address</th>
+      <th>Event Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pingEvent of pingEvents">
+      <td>{{ pingEvent.eventStart }}</td>
+      <td>{{ pingEvent.statusText }}</td>
+      <td>{{ pingEvent.roundtripTime }}</td>
+      <td>{{ pingEvent.address }}</td>
+      <td>{{ pingEvent.duration }} ms</td>
+    </tr>
+  </tbody>
+</table>
